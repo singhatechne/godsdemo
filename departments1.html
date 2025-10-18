@@ -1,0 +1,722 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Find Your Departments</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.4.0/css/all.min.css">
+    <style>
+        /* Reset and Base Styles */
+        * {
+            margin: 0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: 'Segoe UI', Tahoma, Geneva, Verdana, sans-serif;
+        }
+
+        body {
+            line-height: 1.6;
+            color: #333;
+            background-color: #f8f9fa;
+        }
+
+        .container {
+            width: 100%;
+            max-width: 1200px;
+            margin: 0 auto;
+            padding: 0 15px;
+        }
+
+        /* Header Styles */
+        header {
+            background-color: #fff;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+            position: sticky;
+            top: 0;
+            z-index: 1000;
+        }
+
+        .header-container {
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            padding: 15px 0;
+        }
+
+        .logo {
+            display: flex;
+            align-items: center;
+            gap: 10px;
+        }
+
+        .logo img {
+            height: 40px;
+            width: auto;
+        }
+
+        .logo-text {
+            font-size: 1.5rem;
+            font-weight: 700;
+        }
+
+        .logo-text span {
+            color: #2a7de1;
+        }
+
+        .nav-menu {
+            display: flex;
+            list-style: none;
+            gap: 25px;
+            align-items: center;
+        }
+
+        .nav-menu a {
+            text-decoration: none;
+            color: #333;
+            font-weight: 500;
+            transition: color 0.3s;
+        }
+
+        .nav-menu a:hover {
+            color: #2a7de1;
+        }
+
+        .nav-menu .btn {
+            background-color: #2a7de1;
+            color: white;
+            padding: 8px 15px;
+            border-radius: 5px;
+            transition: background-color 0.3s;
+        }
+
+        .nav-menu .btn:hover {
+            background-color: #1c5fb3;
+        }
+
+        .ham-icon {
+            display: none;
+        }
+
+        .ham-img {
+            height: 25px;
+            cursor: pointer;
+        }
+
+        /* Search Section */
+        .search-section {
+            background: linear-gradient(rgba(42, 125, 225, 0.9), rgba(42, 125, 225, 0.8)), url('https://images.unsplash.com/photo-1532938911079-1b06ac7ceec7?ixlib=rb-4.0.3&auto=format&fit=crop&w=1350&q=80');
+            background-size: cover;
+            background-position: center;
+            padding: 80px 0;
+            text-align: center;
+            color: white;
+        }
+
+        .search-container {
+            max-width: 800px;
+            margin: 0 auto;
+            padding: 0 20px;
+        }
+
+        .search-header h1 {
+            font-size: 2.5rem;
+            margin-bottom: 30px;
+            font-weight: 700;
+        }
+
+        .search-inputs {
+            display: flex;
+            width: 100%;
+            max-width: 700px;
+            margin: 0 auto;
+            border-radius: 50px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.2);
+        }
+
+        #treatment {
+            flex-grow: 1;
+            padding: 15px 25px;
+            border: none;
+            font-size: 1rem;
+            outline: none;
+        }
+
+        .search-btn {
+            background-color: #ff6b6b;
+            color: white;
+            border: none;
+            padding: 15px 30px;
+            font-size: 1rem;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+        }
+
+        .search-btn:hover {
+            background-color: #ff5252;
+        }
+
+        /* Departments Section */
+        .Departments {
+            padding: 80px 0;
+            text-align: center;
+        }
+
+        .Departments h2 {
+            font-size: 2.2rem;
+            margin-bottom: 50px;
+            color: #2a7de1;
+            position: relative;
+            display: inline-block;
+        }
+
+        .Departments h2::after {
+            content: '';
+            position: absolute;
+            bottom: -10px;
+            left: 50%;
+            transform: translateX(-50%);
+            width: 80px;
+            height: 3px;
+            background-color: #ff6b6b;
+        }
+
+        .card-main {
+            display: grid;
+            grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
+            gap: 30px;
+            padding: 0 20px;
+        }
+
+        .cards {
+            background-color: white;
+            border-radius: 10px;
+            overflow: hidden;
+            box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
+            transition: transform 0.3s, box-shadow 0.3s;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .cards:hover {
+            transform: translateY(-10px);
+            box-shadow: 0 15px 30px rgba(0, 0, 0, 0.15);
+        }
+
+        .cards img {
+            width: 100%;
+            height: 200px;
+            object-fit: cover;
+        }
+
+        .card {
+            padding: 20px;
+            flex-grow: 1;
+            display: flex;
+            flex-direction: column;
+        }
+
+        .card h3 {
+            font-size: 1.4rem;
+            margin-bottom: 15px;
+            color: #2a7de1;
+        }
+
+        .card ul {
+            list-style: none;
+            text-align: left;
+            margin-bottom: 20px;
+            flex-grow: 1;
+        }
+
+        .card ul li {
+            margin-bottom: 8px;
+            position: relative;
+            padding-left: 20px;
+        }
+
+        .card ul li::before {
+            content: '✓';
+            position: absolute;
+            left: 0;
+            color: #4CAF50;
+            font-weight: bold;
+        }
+
+        .treatment-btn {
+            background-color: #2a7de1;
+            color: white;
+            border: none;
+            padding: 12px 20px;
+            border-radius: 5px;
+            font-weight: 600;
+            cursor: pointer;
+            transition: background-color 0.3s;
+            margin-top: auto;
+        }
+
+        .treatment-btn:hover {
+            background-color: #1c5fb3;
+        }
+
+        /* Footer */
+        footer {
+            background-color: #2c3e50;
+            color: white;
+            padding: 60px 0 20px;
+        }
+
+        .footer-content {
+            display: grid;
+            grid-template-columns: repeat(auto-fit, minmax(250px, 1fr));
+            gap: 40px;
+            margin-bottom: 40px;
+        }
+
+        .footer-column h3 {
+            font-size: 1.3rem;
+            margin-bottom: 20px;
+            position: relative;
+            padding-bottom: 10px;
+        }
+
+        .footer-column h3::after {
+            content: '';
+            position: absolute;
+            bottom: 0;
+            left: 0;
+            width: 40px;
+            height: 2px;
+            background-color: #ff6b6b;
+        }
+
+        .footer-column p {
+            margin-bottom: 15px;
+            line-height: 1.8;
+        }
+
+        .social-icons {
+            display: flex;
+            gap: 15px;
+            margin-top: 20px;
+        }
+
+        .social-icons a {
+            display: flex;
+            align-items: center;
+            justify-content: center;
+            width: 40px;
+            height: 40px;
+            background-color: rgba(255, 255, 255, 0.1);
+            border-radius: 50%;
+            color: white;
+            transition: background-color 0.3s;
+        }
+
+        .social-icons a:hover {
+            background-color: #2a7de1;
+        }
+
+        .footer-column ul {
+            list-style: none;
+        }
+
+        .footer-column ul li {
+            margin-bottom: 10px;
+        }
+
+        .footer-column ul li a {
+            color: #ddd;
+            text-decoration: none;
+            transition: color 0.3s;
+        }
+
+        .footer-column ul li a:hover {
+            color: #2a7de1;
+        }
+
+        .footer-column i {
+            margin-right: 10px;
+            color: #ff6b6b;
+        }
+
+        .copyright {
+            text-align: center;
+            padding-top: 20px;
+            border-top: 1px solid rgba(255, 255, 255, 0.1);
+            font-size: 0.9rem;
+            color: #aaa;
+        }
+
+        /* Responsive Design */
+        @media (max-width: 992px) {
+            .nav-menu {
+                gap: 15px;
+            }
+            
+            .search-header h1 {
+                font-size: 2.2rem;
+            }
+            
+            .card-main {
+                grid-template-columns: repeat(auto-fill, minmax(280px, 1fr));
+            }
+        }
+
+        @media (max-width: 768px) {
+            .nav-menu {
+                display: none;
+            }
+            
+            .ham-icon {
+                display: block;
+            }
+            
+            .search-header h1 {
+                font-size: 1.8rem;
+            }
+            
+            .search-inputs {
+                flex-direction: column;
+                border-radius: 10px;
+            }
+            
+            #treatment {
+                border-radius: 10px 10px 0 0;
+            }
+            
+            .search-btn {
+                border-radius: 0 0 10px 10px;
+            }
+            
+            .Departments h2 {
+                font-size: 1.8rem;
+            }
+            
+            .card-main {
+                grid-template-columns: 1fr;
+                max-width: 500px;
+                margin: 0 auto;
+            }
+            
+            .footer-content {
+                grid-template-columns: 1fr;
+                text-align: center;
+            }
+            
+            .footer-column h3::after {
+                left: 50%;
+                transform: translateX(-50%);
+            }
+        }
+
+        @media (max-width: 576px) {
+            .header-container {
+                padding: 10px 0;
+            }
+            
+            .logo-text {
+                font-size: 1.2rem;
+            }
+            
+            .search-section {
+                padding: 60px 0;
+            }
+            
+            .search-header h1 {
+                font-size: 1.6rem;
+            }
+            
+            .Departments {
+                padding: 60px 0;
+            }
+            
+            .Departments h2 {
+                font-size: 1.6rem;
+            }
+        }
+    </style>
+</head>
+<body>
+    <header>
+        <div class="container header-container">
+            <div class="logo">
+                <img src="./logo/logo.jpeg" alt="Gods Life Health Care">
+                <div class="logo-text">Gods <span>Life</span></div>
+            </div>
+            
+            <ul class="nav-menu">
+                <li><a href="#">Home</a></li>
+                <li><a href="#">Services</a></li>
+                <li><a href="#">Destinations</a></li>
+                <li><a href="#">Doctors</a></li>
+                <li><a href="#">Testimonials</a></li>
+                <li><a href="#">About Us</a></li>
+                <li><a href="#">Contact</a></li>
+                <li><a href="#" class="btn">Get Consultation</a></li>
+            </ul>
+
+            <div class="ham-icon">
+                <img class="ham-img" src="./logo/hamburger.jpeg" alt="Menu">
+            </div>
+        </div>
+    </header>
+
+    <!-- Search Bar -->
+    <section class="search-section">
+        <div class="search-container">
+            <div class="search-header">
+                <h1>Find Your Departments</h1>
+                <div class="search-inputs">
+                    <input type="text" id="treatment" placeholder="Select your treatment">
+                    <button class="search-btn" type="button">Search</button>
+                </div>
+            </div>
+        </div>
+    </section>
+
+    <!-- Departments Section -->
+    <section class="Departments">
+        <h2>Find Your Departments</h2>
+        <div class="card-main">
+            <!-- Fertility Treatment -->
+            <div class="cards" data-name="fertility treatment" data-department="fertility">
+                <img src="6.jpg" alt="Fertility Treatment">
+                <div class="card">
+                    <h3>Fertility Treatment</h3>
+                    <ul>
+                        <li>Advanced reproductive health solutions.</li>
+                        <li>Success Rate: 95%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+
+            <!-- Heart Surgery -->
+            <div class="cards" data-name="heart surgery" data-department="cardiology">
+                <img src="2.jpg" alt="Heart Surgery">
+                <div class="card">
+                    <h3>Heart Surgery</h3>
+                    <ul>
+                        <li>Surgical care for heart conditions.</li>
+                        <li>Success Rate: 92%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+
+            <!-- Orthopedic Care -->
+            <div class="cards" data-name="orthopedic care" data-department="orthopedics">
+                <img src="3.jpg" alt="Orthopedic Care">
+                <div class="card">
+                    <h3>Orthopedic Care</h3>
+                    <ul>
+                        <li>From joint replacement to sports injury recovery.</li>
+                        <li>Success Rate: 90%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+
+            <!-- Cancer Therapy -->
+            <div class="cards" data-name="cancer therapy" data-department="oncology">
+                <img src="4.png" alt="Cancer Therapy">
+                <div class="card">
+                    <h3>Cancer Therapy</h3>
+                    <ul>
+                        <li>Innovative oncology Departments with personalized care.</li>
+                        <li>Success Rate: 90%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+
+            <!-- Cosmetic Surgery -->
+            <div class="cards" data-name="cosmetic surgery" data-department="aesthetics">
+                <img src="5.jpg" alt="Cosmetic Surgery">
+                <div class="card">
+                    <h3>Cosmetic Surgery</h3>
+                    <ul>
+                        <li>Safe and professional cosmetic enhancements.</li>
+                        <li>Success Rate: 95%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+
+            <!-- Neurology -->
+            <div class="cards" data-name="neurology" data-department="neurology">
+                <img src="7.png" alt="Neurology">
+                <div class="card">
+                    <h3>Neurology</h3>
+                    <ul>
+                        <li>Specialized care for brain and nervous system conditions.</li>
+                        <li>Success Rate: 88%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+
+            <!-- Dental Care -->
+            <div class="cards" data-name="dental care" data-department="dentistry">
+                <img src="8.webp" alt="Dental Care">
+                <div class="card">
+                    <h3>Dental Care</h3>
+                    <ul>
+                        <li>Complete dental solutions from cosmetic to oral surgery.</li>
+                        <li>Success Rate: 97%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+
+            <!-- Kidney & Urology -->
+            <div class="cards" data-name="kidney and urology" data-department="urology">
+                <img src="9.jpg" alt="Kidney & Urology">
+                <div class="card">
+                    <h3>Kidney & Urology</h3>
+                    <ul>
+                        <li>Treatment for kidney stones, dialysis, and transplants.</li>
+                        <li>Success Rate: 89%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+
+            <!-- Liver Transplant -->
+            <div class="cards" data-name="liver transplant" data-department="hepatology">
+                <img src="10.jpg" alt="Liver Transplant">
+                <div class="card">
+                    <h3>Liver Transplant</h3>
+                    <ul>
+                        <li>Specialized transplant and hepatology care.</li>
+                        <li>Success Rate: 80%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+
+            <!-- Eye Care -->
+            <div class="cards" data-name="eye care" data-department="ophthalmology">
+                <img src="11.jpg" alt="Eye Care">
+                <div class="card">
+                    <h3>Eye Care</h3>
+                    <ul>
+                        <li>Cataract, LASIK, and other advanced eye surgeries.</li>
+                        <li>Success Rate: 97%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+
+            <!-- Hair Transplant -->
+            <div class="cards" data-name="hair transplant" data-department="dermatology">
+                <img src="12.jpg" alt="Hair Transplant">
+                <div class="card">
+                    <h3>Hair Transplant</h3>
+                    <ul>
+                        <li>Permanent and natural-looking hair restoration procedures.</li>
+                        <li>Success Rate: 95%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+
+            <!-- Tummy Tuck -->
+            <div class="cards" data-name="tummy tuck" data-department="cosmetic surgery">
+                <img src="13.webp" alt="Tummy Tuck">
+                <div class="card">
+                    <h3>Tummy Tuck</h3>
+                    <ul>
+                        <li>Improve the shape and appearance of the stomach area.</li>
+                        <li>Success Rate: 97%</li>
+                    </ul>
+                </div>
+                <button class="treatment-btn" onclick="window.location.href='book.html'">Learn More</button>
+            </div>
+        </div>
+    </section>
+
+    <!-- Footer -->
+    <footer>
+        <div class="container">
+            <div class="footer-content">
+                <div class="footer-column">
+                    <h3>Gods Life Health Care</h3>
+                    <p>Providing world-class medical tourism services with compassion and excellence.</p>
+                    <div class="social-icons">
+                        <a href="#"><i class="fab fa-facebook-f"></i></a>
+                        <a href="#"><i class="fab fa-twitter"></i></a>
+                        <a href="#"><i class="fab fa-instagram"></i></a>
+                        <a href="#"><i class="fab fa-linkedin-in"></i></a>
+                    </div>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Quick Links</h3>
+                    <ul>
+                        <li><a href="#">Home</a></li>
+                        <li><a href="#">Services</a></li>
+                        <li><a href="#">Destinations</a></li>
+                        <li><a href="#">Doctors</a></li>
+                        <li><a href="#">Testimonials</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Medical Services</h3>
+                    <ul>
+                        <li><a href="#">Cardiac Surgery</a></li>
+                        <li><a href="#">Orthopedics</a></li>
+                        <li><a href="#">Cosmetic Surgery</a></li>
+                        <li><a href="#">Dental Care</a></li>
+                        <li><a href="#">Fertility Departments</a></li>
+                    </ul>
+                </div>
+                
+                <div class="footer-column">
+                    <h3>Contact Us</h3>
+                    <p><i class="fas fa-map-marker-alt"></i> 123 Medical Avenue, Health City</p>
+                    <p><i class="fas fa-phone"></i> +1 234 567 8900</p>
+                    <p><i class="fas fa-envelope"></i> info@godslifehealthcare.com</p>
+                </div>
+            </div>
+            
+            <div class="copyright">
+                <p>&copy; 2023 Gods Life Health Care. All rights reserved.</p>
+            </div>
+        </div>
+    </footer>
+
+    <script>
+        // Simple JavaScript for mobile menu toggle
+        document.querySelector('.ham-icon').addEventListener('click', function() {
+            const navMenu = document.querySelector('.nav-menu');
+            navMenu.style.display = navMenu.style.display === 'flex' ? 'none' : 'flex';
+        });
+
+        // Search functionality
+        document.querySelector('.search-btn').addEventListener('click', function() {
+            const searchTerm = document.getElementById('treatment').value.toLowerCase();
+            const cards = document.querySelectorAll('.cards');
+            
+            cards.forEach(card => {
+                const cardName = card.getAttribute('data-name').toLowerCase();
+                if (cardName.includes(searchTerm) || searchTerm === '') {
+                    card.style.display = 'flex';
+                } else {
+                    card.style.display = 'none';
+                }
+            });
+        });
+
+        // Make search work on Enter key
+        document.getElementById('treatment').addEventListener('keyup', function(event) {
+            if (event.key === 'Enter') {
+                document.querySelector('.search-btn').click();
+            }
+        });
+    </script>
+</body>
+</html>
