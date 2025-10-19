@@ -440,6 +440,114 @@
             box-shadow: 0 5px 15px rgba(0, 0, 0, 0.1);
         }
 
+        /* Collapsible Tabs Styles */
+        .collapsible-tabs {
+            margin-top: 40px;
+            border-radius: 8px;
+            overflow: hidden;
+            box-shadow: 0 2px 10px rgba(0, 0, 0, 0.1);
+        }
+
+        .collapsible-tab {
+            background: white;
+            border-bottom: 1px solid #eaeaea;
+        }
+
+        .collapsible-tab:last-child {
+            border-bottom: none;
+        }
+
+        .collapsible-tab-header {
+            padding: 18px 20px;
+            background: #f8f9fa;
+            cursor: pointer;
+            display: flex;
+            justify-content: space-between;
+            align-items: center;
+            transition: background 0.3s ease;
+        }
+
+        .collapsible-tab-header:hover {
+            background: #edf2f7;
+        }
+
+        .collapsible-tab-header.active {
+            background: #3498db;
+            color: white;
+        }
+
+        .collapsible-tab-title {
+            font-size: 1.2rem;
+            font-weight: 600;
+        }
+
+        .collapsible-tab-icon {
+            transition: transform 0.3s ease;
+        }
+
+        .collapsible-tab-header.active .collapsible-tab-icon {
+            transform: rotate(180deg);
+        }
+
+        .collapsible-tab-content {
+            padding: 0;
+            max-height: 0;
+            overflow: hidden;
+            transition: max-height 0.3s ease, padding 0.3s ease;
+        }
+
+        .collapsible-tab-content.active {
+            padding: 20px;
+            max-height: 1000px;
+        }
+
+        .collapsible-content-grid {
+            display: grid;
+            grid-template-columns: 1fr 1fr;
+            gap: 20px;
+        }
+
+        .collapsible-info-section {
+            margin-bottom: 20px;
+        }
+
+        .collapsible-info-section h4 {
+            color: #3498db;
+            margin-bottom: 10px;
+            font-size: 1.1rem;
+        }
+
+        .collapsible-info-section p {
+            color: #555;
+            line-height: 1.6;
+        }
+
+        .collapsible-stats {
+            display: flex;
+            justify-content: space-between;
+            margin-top: 15px;
+            background: #f8f9fa;
+            padding: 12px;
+            border-radius: 6px;
+        }
+
+        .collapsible-stat-item {
+            text-align: center;
+            flex: 1;
+        }
+
+        .collapsible-stat-value {
+            font-size: 1.5rem;
+            font-weight: 700;
+            color: #3498db;
+        }
+
+        .collapsible-stat-label {
+            font-size: 0.8rem;
+            color: #7f8c8d;
+            margin-top: 3px;
+        }
+
         /* Form styling for Consult with Experts tab */
         .form-section {
             padding: 20px;
@@ -1015,6 +1123,10 @@
                 gap: 20px;
             }
             
+            .collapsible-content-grid {
+                grid-template-columns: 1fr;
+            }
+            
             .tab-interface {
                 flex-direction: column;
                 min-height: auto;
@@ -1272,6 +1384,149 @@
                                     <div class="stat-item">
                                         <div class="stat-value">94%</div>
                                         <div class="stat-label">Patient Satisfaction</div>
+                                    </div>
+                                </div>
+                            </div>
+                        </div>
+                        
+                        <!-- Collapsible Tabs Section -->
+                        <div class="collapsible-tabs">
+                            <div class="collapsible-tab">
+                                <div class="collapsible-tab-header" onclick="toggleCollapsibleTab(this)">
+                                    <div class="collapsible-tab-title">Advanced Treatment Options</div>
+                                    <div class="collapsible-tab-icon">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                <div class="collapsible-tab-content">
+                                    <div class="collapsible-content-grid">
+                                        <div class="collapsible-info-section">
+                                            <h4>Targeted Therapy</h4>
+                                            <p>Targeted therapy uses drugs to target specific genes and proteins that are involved in the growth and survival of cancer cells. This treatment can block the growth and spread of cancer cells while limiting damage to healthy cells.</p>
+                                        </div>
+                                        <div class="collapsible-info-section">
+                                            <h4>Immunotherapy</h4>
+                                            <p>Immunotherapy helps your immune system fight cancer. It uses substances made by the body or in a laboratory to improve or restore immune system function.</p>
+                                        </div>
+                                    </div>
+                                    <div class="collapsible-stats">
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">72%</div>
+                                            <div class="collapsible-stat-label">Response Rate</div>
+                                        </div>
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">18 mos</div>
+                                            <div class="collapsible-stat-label">Avg. Survival</div>
+                                        </div>
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">45%</div>
+                                            <div class="collapsible-stat-label">Side Effects</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="collapsible-tab">
+                                <div class="collapsible-tab-header" onclick="toggleCollapsibleTab(this)">
+                                    <div class="collapsible-tab-title">Diagnostic Procedures</div>
+                                    <div class="collapsible-tab-icon">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                <div class="collapsible-tab-content">
+                                    <div class="collapsible-content-grid">
+                                        <div class="collapsible-info-section">
+                                            <h4>Imaging Tests</h4>
+                                            <p>Imaging tests allow your doctor to look for a mass or lesion in your lungs. These may include X-rays, CT scans, MRI scans, and PET scans to detect abnormalities and determine the extent of cancer spread.</p>
+                                        </div>
+                                        <div class="collapsible-info-section">
+                                            <h4>Biopsy Procedures</h4>
+                                            <p>A biopsy is the only way to definitively diagnose lung cancer. During a biopsy, your doctor removes a small sample of cells from the suspicious area for laboratory testing.</p>
+                                        </div>
+                                    </div>
+                                    <div class="collapsible-stats">
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">98%</div>
+                                            <div class="collapsible-stat-label">Accuracy</div>
+                                        </div>
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">30 min</div>
+                                            <div class="collapsible-stat-label">Procedure Time</div>
+                                        </div>
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">2 days</div>
+                                            <div class="collapsible-stat-label">Results Time</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="collapsible-tab">
+                                <div class="collapsible-tab-header" onclick="toggleCollapsibleTab(this)">
+                                    <div class="collapsible-tab-title">Recovery & Support</div>
+                                    <div class="collapsible-tab-icon">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                <div class="collapsible-tab-content">
+                                    <div class="collapsible-content-grid">
+                                        <div class="collapsible-info-section">
+                                            <h4>Rehabilitation</h4>
+                                            <p>Pulmonary rehabilitation can help you regain your strength and improve your breathing after lung cancer treatment. This program includes exercise training, nutrition advice, and education about your condition.</p>
+                                        </div>
+                                        <div class="collapsible-info-section">
+                                            <h4>Support Services</h4>
+                                            <p>We offer comprehensive support services including counseling, support groups, pain management, and palliative care to help you and your family cope with the challenges of lung cancer.</p>
+                                        </div>
+                                    </div>
+                                    <div class="collapsible-stats">
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">86%</div>
+                                            <div class="collapsible-stat-label">Patient Recovery</div>
+                                        </div>
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">24/7</div>
+                                            <div class="collapsible-stat-label">Support Available</div>
+                                        </div>
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">95%</div>
+                                            <div class="collapsible-stat-label">Satisfaction</div>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                            
+                            <div class="collapsible-tab">
+                                <div class="collapsible-tab-header" onclick="toggleCollapsibleTab(this)">
+                                    <div class="collapsible-tab-title">Prevention & Screening</div>
+                                    <div class="collapsible-tab-icon">
+                                        <i class="fas fa-chevron-down"></i>
+                                    </div>
+                                </div>
+                                <div class="collapsible-tab-content">
+                                    <div class="collapsible-content-grid">
+                                        <div class="collapsible-info-section">
+                                            <h4>Risk Reduction</h4>
+                                            <p>The most important thing you can do to prevent lung cancer is to not smoke and to avoid secondhand smoke. Other preventive measures include testing your home for radon and avoiding carcinogens at work.</p>
+                                        </div>
+                                        <div class="collapsible-info-section">
+                                            <h4>Screening Programs</h4>
+                                            <p>Annual lung cancer screening with low-dose CT scans is recommended for people at high risk of lung cancer due to smoking history. Early detection significantly improves treatment outcomes.</p>
+                                        </div>
+                                    </div>
+                                    <div class="collapsible-stats">
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">90%</div>
+                                            <div class="collapsible-stat-label">Early Detection</div>
+                                        </div>
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">40%</div>
+                                            <div class="collapsible-stat-label">Risk Reduction</div>
+                                        </div>
+                                        <div class="collapsible-stat-item">
+                                            <div class="collapsible-stat-value">5 yrs</div>
+                                            <div class="collapsible-stat-label">Survival Rate</div>
+                                        </div>
                                     </div>
                                 </div>
                             </div>
@@ -1793,6 +2048,36 @@
             document.getElementById(tabId).classList.add('active');
             event.currentTarget.classList.add('active');
             event.currentTarget.classList.remove('inactive');
+            
+            // Close all collapsible tabs when switching between departments
+            const collapsibleTabs = document.querySelectorAll('.collapsible-tab-header');
+            collapsibleTabs.forEach(tab => {
+                tab.classList.remove('active');
+                tab.nextElementSibling.classList.remove('active');
+            });
+        }
+
+        // Function for collapsible tabs
+        function toggleCollapsibleTab(element) {
+            // Close all other collapsible tabs
+            const allTabHeaders = document.querySelectorAll('.collapsible-tab-header');
+            const allTabContents = document.querySelectorAll('.collapsible-tab-content');
+            
+            allTabHeaders.forEach(header => {
+                if (header !== element) {
+                    header.classList.remove('active');
+                }
+            });
+            
+            allTabContents.forEach(content => {
+                if (content !== element.nextElementSibling) {
+                    content.classList.remove('active');
+                }
+            });
+            
+            // Toggle the clicked tab
+            element.classList.toggle('active');
+            element.nextElementSibling.classList.toggle('active');
         }
 
         // Simple testimonial slider
